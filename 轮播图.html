@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .banner {
+            width: 800px;
+            height: 300px;
+            margin: 20px auto;
+            position: relative;
+        }
+
+        .banner_img_a {
+            top: 0;
+            position: absolute;
+            display: none;
+            width: 100%;
+        }
+
+        .banner_img_a img {
+            width: 100%;
+            height: 300px;
+        }
+
+        .banner .num {
+            /* background-color: black; */
+            /* color: white; */
+            position: absolute;
+            bottom: 20px;
+            left: 10px;
+            font-weight: bold;
+        }
+
+        .banner span {
+            background-color: yellow;
+            padding: 4px 9px;
+            border: 1px solid yellow;
+            margin: 0 5px;
+        }
+
+        .cur {
+            border-color: red !important;
+        }
+
+        .banner .page {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="banner">
+        <a href="" class="banner_img_a" style="display:block">
+            <img src="imgs/a1.jpg" alt="">
+        </a>
+        <a href="" class="banner_img_a">
+            <img src="imgs/a2.jpg" alt="">
+        </a>
+        <a href="" class="banner_img_a">
+            <img src="imgs/a3.jpg" alt="">
+        </a>
+        <a href="" class="banner_img_a">
+            <img src="imgs/a4.jpg" alt="">
+        </a>
+
+        <!-- 轮播序号 -->
+        <div class="num">
+            <span class="cur">1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+
+        </div>
+        <!-- 上一张和下一张 -->
+        <div class="page">
+            <span class="prev">&lt;</span>
+            <span class="next">&gt;</span>
+        </div>
+    </div>
+
+
+    <script>
+        // 获取要操作的标签
+        // 获取所有图片
+        var imgs = document.querySelectorAll('.banner_img_a')
+        var spans = document.querySelectorAll(".num span")
+        var prewpage = document.querySelector('.prev')
+        var nextpage = document.querySelector('.next')
+
+        // 定义一个索引值
+        var index = 0;
+        // 用来记录上一张图片
+        var prev = imgs[0]
+        // 用来记录上一个数字
+        var prevnum = spans[0]
+        // 定义一个函数 来计算索引值变化
+        function showindex() {
+            index = index >= imgs.length - 1 ? 0 : ++index;
+            move();
+        }
+
+        // 轮播图转起来
+        function move() {
+            prev.style.display = 'none'
+            imgs[index].style.display = 'block'
+            prevnum.className = ''
+            prev = imgs[index];
+            spans[index].className = 'cur'
+            prevnum = spans[index]
+        }
+        var img = setInterval(showindex, 3700)
+        nextpage.onclick = function () {
+            clearInterval(img)
+            showindex()
+            // alert(1)
+            // setInterval(showindex, 3700)
+        }
+        prewpage.onclick =      function(){
+            clearInterval(img)
+             index  =  index<=0?imgs.length-1:--index 
+             move()           
+            //  setInterval(showindex, 3700)
+        }
+    </script>
+</body>
+
+</html>

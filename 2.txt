@@ -1,0 +1,13 @@
+导入模块包
+var expreess = require("express")
+var bodyparser = reqire("body=parser")
+创建应用程序
+var  app = express()
+
+
+创建静态文件夹
+ app.use(express.static("root"))
+ app.use(bodyparse.urlencoded({extended:true}))
+监听
+ app.listen(3000,function(){
+})
